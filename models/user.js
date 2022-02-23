@@ -1,54 +1,78 @@
 const mongoose = require('mongoose');
-/// ===require to password hash==
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
-/// =============================
+const jwt = require('jsonwebtoken');
 const userSchema = mongoose.Schema({
-    name :{
-        type:String,
-        maxlength:50
+    name: {
+        type: String,
+        maxlength: 50
     },
-    email:{
-        type:String,
-        trim:true,
-        unique:1
+    email: {
+        type: String,
+        trim: true,
+        unique: 1
     },
-    password:{
-        type:String,
-        minglength:5
+    password: {
+        type: String,
+        minglength: 5
     },
-    lastname:{
-        type:String,
-        maxlength:50
+    lastname: {
+        type: String,
+        maxlength: 50
     },
-    role:{
-        type:Number,
-        default:0
+    role: {
+        type: Number,
+        default: 0
     },
-    token :{
-        type:String,
+    token: {
+        type: String,
     },
-    tokenExp:{
-        type:Number
+    tokenExp: {
+        type: Number
     }
 });
 
-userSchema.pre('save',(next)=>{ // this means 'before saving'
+userSchema.pre('save', function (next) { // this means 'before saving' 
     var user = this;
     if(user.isModified('password')){
-        bcrypt.genSalt(saltRounds, (err,salt)=>{
-            if(err) return next(err);
-            bcrypt.hash(userSchema.password,salt, (err,hash)=>{
-                if(err) return next(err);
-                user.password = hash
-            })
+        // bcrypt.genSalt(saltRounds, function(err,salt){
+        //     if(err) return next(err);
+        //     bcrypt.hash(user.password,salt, function(err,hash){
+        //         if(err) return next(err);
+        //         user.password = hash
+        //     })
+        // })
+        bcrypt.hash(user.password,saltRounds,function(err,hash){
+            if(err){ 
+                return next(err);
+            }else{
+                user.password = hash;
+                next();
+            }
         })
     }else{
         next()
     }
 })
 
+userSchema.methods.comparePassword = function (plainPwd, cb) {
+    let pwd = this.password
+    bcrypt.compare(plainPwd, pwd, function (err, isMatch) {
+        if(err) return cb(err);
+        cb(null,isMatch)
+    })
+}
 
+userSchema.methods.generateToken = function (cb) {
+    var user = this;
+    var token = jwt.sign(user._id.toHexString(), 'secret');
+
+    user.token = token;
+    user.save(function (err, user) {
+        if (err) return cb(err)
+        cb(null, user)
+    })
+}
 const User = mongoose.model('User', userSchema);
 
-module.exports={User}
+module.exports = { User }
