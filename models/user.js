@@ -35,14 +35,14 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save', function (next) { // this means 'before saving' 
     var user = this;
     if(user.isModified('password')){
-        // bcrypt.genSalt(saltRounds, function(err,salt){
+        // bcrypt.genSalt(saltRounds, function(err,salt){ // first method to make a hash password
         //     if(err) return next(err);
         //     bcrypt.hash(user.password,salt, function(err,hash){
         //         if(err) return next(err);
         //         user.password = hash
         //     })
         // })
-        bcrypt.hash(user.password,saltRounds,function(err,hash){
+        bcrypt.hash(user.password,saltRounds,function(err,hash){ // second method to make a hash password
             if(err){ 
                 return next(err);
             }else{
@@ -73,6 +73,19 @@ userSchema.methods.generateToken = function (cb) {
         cb(null, user)
     })
 }
+
+userSchema.statics.findByToken = function(token,cb){
+    var user = this;
+
+    jwt.verify(token,'secret',function(err,decode){
+        user.findOne({"_id":decode,"token":token},function(err,user){
+            if(err) return cb(err);
+            cb(null, user)
+        });
+    });
+
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = { User }
