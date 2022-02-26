@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const config = require('./config/keys');
+const config = require('./server/config/keys');
 
-const { User } = require('./models/user');
+const { User } = require('./server/models/user');
 const { auth } = require('./middleware/auth');
 
 app.use(bodyParser.urlencoded({ extended: true }));
