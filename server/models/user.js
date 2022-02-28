@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -24,6 +25,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    image : String,
     token: {
         type: String,
     },
@@ -32,17 +34,18 @@ const userSchema = mongoose.Schema({
     }
 });
 
-userSchema.pre('save', function (next) { // this means 'before saving' 
+//비밀번호 암호화
+userSchema.pre('save', function (next) { // 저장 하기 전에 이루어지는 함수
     var user = this;
-    if(user.isModified('password')){
-        // bcrypt.genSalt(saltRounds, function(err,salt){ // first method to make a hash password
+    if(user.isModified('password')){ 
+        // bcrypt.genSalt(saltRounds, function(err,salt){ // 암호화 첫번째 방법
         //     if(err) return next(err);
         //     bcrypt.hash(user.password,salt, function(err,hash){
         //         if(err) return next(err);
         //         user.password = hash
         //     })
         // })
-        bcrypt.hash(user.password,saltRounds,function(err,hash){ // second method to make a hash password
+        bcrypt.hash(user.password,saltRounds,function(err,hash){ // 암호화 두번째 방법
             if(err){ 
                 return next(err);
             }else{
@@ -50,23 +53,21 @@ userSchema.pre('save', function (next) { // this means 'before saving'
                 next();
             }
         })
-    }else{
+    }else{ //비밀번호를 바꾸는것이 아니라 다른것을 바꿀 경우에는 암호화를 진행하지 않도록
         next()
     }
 })
 
-userSchema.methods.comparePassword = function (plainPwd, cb) {
-    let pwd = this.password
-    bcrypt.compare(plainPwd, pwd, function (err, isMatch) {
+userSchema.methods.comparePassword = function (plainPwd, cb) { //비밀번호 매칭 함수
+    bcrypt.compare(plainPwd, this.password, function (err, isMatch) {
         if(err) return cb(err);
         cb(null,isMatch)
     })
 }
 
-userSchema.methods.generateToken = function (cb) {
+userSchema.methods.generateToken = function (cb) { //jsonwebtoken 을 이용해서 token 생성
     var user = this;
     var token = jwt.sign(user._id.toHexString(), 'secret');
-
     user.token = token;
     user.save(function (err, user) {
         if (err) return cb(err)
@@ -74,9 +75,9 @@ userSchema.methods.generateToken = function (cb) {
     })
 }
 
-userSchema.statics.findByToken = function(token,cb){
+userSchema.statics.findByToken = function(token,cb){ // 토큰을 가져오는 메서드
     var user = this;
-
+    //token decode 
     jwt.verify(token,'secret',function(err,decode){
         user.findOne({"_id":decode,"token":token},function(err,user){
             if(err) return cb(err);
