@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const config = require('./server/config/keys');
+const config = require('./config/keys');
 
-const { User } = require('./server/models/user');
-const { auth } = require('./server/middleware/auth');
+const { User } = require('./models/user');
+const { auth } = require('./middleware/auth');
 
 //application/x-www-form-urlencoded >> 이렇게 된 데이터를 분석해서 가져 올 수 있게 해줌
 app.use(bodyParser.urlencoded({ extended: true })); 
@@ -19,6 +19,9 @@ mongoose.connect(config.mongoURI,).then(() => { console.log('DB CONNECTED') })
     .catch(err => { console.log('===DB error=== ::: ' + err) }
 );
 
+app.get('/api/hello', (req, res) => {
+    res.send("안녕하세요")
+ });
 
 app.get('/api/user/auth',auth, (req, res) => {
    res.status(200).json({
