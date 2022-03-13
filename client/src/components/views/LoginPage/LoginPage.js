@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { loginUser } from "../../../_actions/user_action";
-require("react-dom");
-window.React2 = require("react");
-console.log(window.React1 === window.React2);
 function LoginPage() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const onEmailHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -19,7 +16,7 @@ function LoginPage() {
     e.preventDefault();
     let body = {
       email: Email,
-      Password: Password,
+      password: Password,
     };
     // axios.post("/api/user/login", body).then((res) => {
     //   console.log(res);
