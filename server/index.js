@@ -69,7 +69,6 @@ app.post("/api/user/login", (req, res) => {
     }
     //compare password
     user.comparePassword(req.body.password, (err, isMatch) => {
-      console.log(req.body.password);
       if (!isMatch) {
         //isMatch가 false면
         return res.json({
@@ -83,7 +82,7 @@ app.post("/api/user/login", (req, res) => {
       if (err) return res.status(400).send(err);
       res.cookie("x_auth", user.token).status(200).json({
         loginSuccess: true,
-        message: "login successed!",
+        userId: user._id,
       });
     });
   });
