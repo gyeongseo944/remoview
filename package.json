@@ -6,11 +6,12 @@
   "scripts": {
     "start": "node index.js",
     "backend": "nodemon server/index.js",
-    "dev" : "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "Gyeongseo",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "concurrently": "^7.0.0",

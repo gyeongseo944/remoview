@@ -28,7 +28,7 @@ app.get("/api/hello", (req, res) => {
   res.send("안녕하세요");
 });
 
-app.get("/api/user/auth", auth, (req, res) => {
+app.get("/api/users/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -41,7 +41,7 @@ app.get("/api/user/auth", auth, (req, res) => {
   });
 });
 
-app.post("/api/user/register", (req, res) => {
+app.post("/api/users/register", (req, res) => {
   //회원가입 할 때 필요한 정보를 가지고 있는 user
   const user = new User(req.body);
   //db에 회원 정보 저장
@@ -57,7 +57,7 @@ app.post("/api/user/register", (req, res) => {
   });
 });
 
-app.post("/api/user/login", (req, res) => {
+app.post("/api/users/login", (req, res) => {
   //find email
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
@@ -88,7 +88,7 @@ app.post("/api/user/login", (req, res) => {
   });
 });
 
-app.get("/api/user/logout", auth, (req, res) => {
+app.get("/api/users/logout", auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({
