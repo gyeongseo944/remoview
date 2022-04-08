@@ -15,7 +15,6 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <div style={{ paddingTop: "60px" }}></div>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/login" element={<LoginPage />} />
