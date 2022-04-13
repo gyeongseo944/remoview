@@ -15,7 +15,7 @@ function RightMenu(props) {
       if (response.status === 200) {
         navigate("/login");
       } else {
-        alert("Log Out Failed");
+        alert("Logout Failed");
       }
     });
   };

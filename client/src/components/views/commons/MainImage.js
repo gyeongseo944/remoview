@@ -1,0 +1,30 @@
+import React from "react";
+
+//es6 비구조화할당 >> 비구조화할당 미사용시 (props)를 사용하여 props.image << 이런식으로 작성
+function MainImage({ image, title, description }) {
+  return (
+    <div
+      style={{
+        background: `linear-gradient(to bottom, rgba(0,0,0,0)39%,
+      rgba(0,0,0,0)41%,rgba(0,0,0,0.65)100%)`,
+        backgroundImage: `url('${image}')`,
+        backgroundColor: "#1c1c1c",
+        height: "550px",
+        backgroundSize: "100%,cover",
+        backgroundPosition: "center,center",
+        width: "100%",
+        position: "relative",
+      }}
+    >
+      <div>
+        <div style={{ position: "absolute", maxWidth: "500px", bottom: "2rem", marginLeft: "2rem" }}>
+          {/* <h2 style={{ color: "white" }}>The most popular movie in korea</h2> */}
+          <h1 style={{ color: "white" }}>{title}</h1>
+          <p style={{ color: "white", fontSize: "1rem" }}>{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default MainImage;

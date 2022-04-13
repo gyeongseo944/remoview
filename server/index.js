@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const cors = require("cors");
 
 const config = require("./config/keys");
 
@@ -15,6 +16,8 @@ mongoose
   .catch((err) => {
     console.log("===DB error=== ::: " + err);
   });
+
+app.use(cors());
 
 //application/x-www-form-urlencoded >> 이렇게 된 데이터를 분석해서 가져 올 수 있게 해줌
 app.use(bodyParser.urlencoded({ extended: true }));
