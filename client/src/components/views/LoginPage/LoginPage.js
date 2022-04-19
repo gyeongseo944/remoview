@@ -49,7 +49,7 @@ function LoginPage(props) {
                 if (rememberMe === true) {
                   window.localStorage.setItem("rememberMe", values.email);
                 } else {
-                  localStorage.removeItem("rememberMe");
+                  window.localStorage.removeItem("rememberMe");
                 }
                 navigate("/");
               } else {
@@ -135,4 +135,4 @@ function LoginPage(props) {
   );
 }
 
-export default Auth(LoginPage, null);
+export default Auth(LoginPage, false);

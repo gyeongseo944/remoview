@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { API_URL, API_KEY, IMG_URL } from "../../Config";
+import Auth from "../../../hoc/auth";
 import { useParams } from "react-router-dom";
 import MainImage from "../commons/MainImage";
 import MovieInfo from "./Sections/MovieInfo";
 import GridCards from "../commons/GridCards";
+import Thumbs from "./Sections/Thumbs";
 import { Row } from "antd";
 
 function MovieDetail() {
@@ -65,9 +67,12 @@ function MovieDetail() {
               ))}
           </Row>
         )}
+        <div style={{ textAlign: "center" }}>
+          <Thumbs movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem("userId")} />
+        </div>
       </div>
     </div>
   );
 }
 
-export default MovieDetail;
+export default Auth(MovieDetail, null);
