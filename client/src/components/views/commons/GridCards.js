@@ -13,7 +13,7 @@ function GridCards(props) {
     paddingTop: "110px",
     visibility: Visibility,
   };
-  if (props.page === "landingPage") {
+  if (props.page === "moviePage") {
     return (
       <Col lg={6} md={8} xs={24}>
         <div style={{ position: "relative" }}>

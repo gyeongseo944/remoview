@@ -1,7 +1,17 @@
 import React from "react";
 
 //es6 비구조화할당 >> 비구조화할당 미사용시 (props)를 사용하여 props.image << 이런식으로 작성
-function MainImage({ image, title, description }) {
+function MainImage({ image, title, description, page }) {
+  let mainTitle = "";
+  if (page === "landing" || page === "popular") {
+    mainTitle = "The most popular movie in korea";
+  } else if (page === "now_playing") {
+    mainTitle = "Now playing movie in korea";
+  } else if (page == "top_rated") {
+    mainTitle = "Top rated movie in korea";
+  } else if (page == "upcoming") {
+    mainTitle = "Upcoming movie in korea";
+  }
   return (
     <div
       style={{
@@ -18,7 +28,7 @@ function MainImage({ image, title, description }) {
     >
       <div>
         <div style={{ position: "absolute", maxWidth: "500px", bottom: "2rem", marginLeft: "2rem" }}>
-          {/* <h2 style={{ color: "white" }}>The most popular movie in korea</h2> */}
+          <h2 style={{ color: "white" }}>{mainTitle}</h2>
           <h1 style={{ color: "white" }}>{title}</h1>
           <p style={{ color: "white", fontSize: "1rem" }}>{description}</p>
         </div>

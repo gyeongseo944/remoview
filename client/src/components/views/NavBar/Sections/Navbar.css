@@ -15,9 +15,12 @@
 .menu__logo a {
   display: inline-block;
   font-size: 20px;
-  padding: 5px 20px 0px 0px;
+  /* padding: 2px 0px 5px 0px; */
 }
-
+.menu__logo a img{
+  width: 120px;
+  height: 50px;
+}
 .menu__container .ant-menu-item {
   padding: 0px 5px;
 }
@@ -37,10 +40,12 @@
 
 .menu__container .menu_left {
   float: left;
+  width: 450px;
 }
 
 .menu__container .menu_rigth {
   float: right;
+  width: 130px;
 }
 
 .menu__mobile-button {
@@ -49,7 +54,13 @@
   padding: 6px;
   margin-top: 8px;
   display: none !important; /* use of important to overwrite ant-btn */
-  background: #3e91f7;
+  background: #c2986e;
+  border-color: #c2986e;
+}
+.menu__mobile-button:hover{
+  background: white;
+  border-color: #c2986e;
+  color:#c2986e
 }
 
 .menu_drawer .ant-drawer-body {
@@ -60,14 +71,49 @@
 .menu_drawer .ant-drawer-header {
   padding: 14px 24px !important;
 }
-
+.navbarFont {
+  font-size: 18px;
+}
+.navbarA:hover .navbarFont{
+  color: #c2986e;
+}
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+  color: #c2986e;
+}
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after {
+  border-bottom: 2px solid #c2986e;
+}
+.ant-menu-light .ant-menu-item:hover,
+.ant-menu-light .ant-menu-item-active,
+.ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-light .ant-menu-submenu-active,
+.ant-menu-light .ant-menu-submenu-title:hover,
+.ant-menu-light .ant-menu-item-active .ant-menu-title-content a,
+.ant-menu-light .ant-menu-submenu-active .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  color: #c2986e;
+}
 @media (max-width: 767px) {
   .menu__mobile-button {
     display: inline-block !important;
   }
-
-  .menu_left,
   .menu_rigth {
+    display: none;
+  }
+  .menu_left {
     display: none;
   }
 
@@ -81,6 +127,6 @@
   }
 
   .menu__logo a {
-    padding: 10px 20px;
+    padding: 0 20px;
   }
 }

@@ -20,13 +20,11 @@ function MovieDetail() {
     fetch(endPointInfo)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setMovie(res);
       });
     fetch(endPointCrew)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setCasts(res.cast);
       });
   }, []);
@@ -39,7 +37,7 @@ function MovieDetail() {
     <div>
       {/* Header */}
       <MainImage
-        image={Movie.backdrop_path ? `${IMG_URL}w500${Movie.backdrop_path}` : `${IMG_URL}w500${Movie.poster_path}`}
+        image={Movie.backdrop_path ? `${IMG_URL}w1280${Movie.backdrop_path}` : `${IMG_URL}w1280${Movie.poster_path}`}
         title={Movie.title}
         description={Movie.overview}
       />

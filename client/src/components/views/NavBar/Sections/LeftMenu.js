@@ -7,16 +7,36 @@ function LeftMenu(props) {
   return (
     <Menu mode={props.mode}>
       <Menu.Item key="mail">
-        <a href="/">Home</a>
+        <a href="/">
+          <span className="navbarFont">Home</span>
+        </a>
       </Menu.Item>
-      <SubMenu title={<span>Blogs</span>}>
-        <MenuItemGroup title="Item 1">
-          <Menu.Item key="setting:1">Option 1</Menu.Item>
-          <Menu.Item key="setting:2">Option 2</Menu.Item>
+      <SubMenu title={<span className="navbarFont">Category</span>}>
+        <MenuItemGroup title="Movie List">
+          <Menu.Item>
+            <a href="/list/popular">
+              <span className="navbarFont">Popular List</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/list/nowPlaying">
+              <span className="navbarFont">Now playing List</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/list/topRated">
+              <span className="navbarFont">Top Rated List</span>
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/list/upcoming">
+              <span className="navbarFont">Upcoming List</span>
+            </a>
+          </Menu.Item>
         </MenuItemGroup>
-        <MenuItemGroup title="Item 2">
-          <Menu.Item key="setting:3">Option 3</Menu.Item>
-          <Menu.Item key="setting:4">Option 4</Menu.Item>
+        <MenuItemGroup title="My Movies">
+          <Menu.Item>Option 3</Menu.Item>
+          <Menu.Item>Option 4</Menu.Item>
         </MenuItemGroup>
       </SubMenu>
     </Menu>

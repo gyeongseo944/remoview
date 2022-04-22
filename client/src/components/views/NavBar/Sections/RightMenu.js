@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Menu } from "antd";
-import axios from "axios";
-import { USER_SERVER } from "../../../Config";
+// import axios from "axios";
+// import { USER_SERVER } from "../../../Config";
 import { logoutUser } from "../../../../_actions/user_action";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function RightMenu(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   const logoutHandler = () => {
@@ -24,7 +24,8 @@ function RightMenu(props) {
     dispatch(logoutUser()).then((res) => {
       if (res.payload.logoutSuccess) {
         window.localStorage.removeItem("userId");
-        navigate("/");
+        // navigate("/");
+        window.location.replace("/");
       } else {
         alert("Logout Failed");
       }
@@ -35,10 +36,14 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">Signin</a>
+          <a href="/login">
+            <span className="navbarFont">Sign in</span>
+          </a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Signup</a>
+          <a href="/register">
+            <span className="navbarFont">Sign out</span>
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -46,7 +51,9 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
+          <a onClick={logoutHandler}>
+            <span className="navbarFont">Logout</span>
+          </a>
         </Menu.Item>
       </Menu>
     );

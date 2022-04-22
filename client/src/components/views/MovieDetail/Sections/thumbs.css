@@ -1,0 +1,16 @@
+.btn {
+  background-color: white;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+}
+.btnTrue {
+  color: #4562D4;
+}
+.btnFalse{
+  color: #666666;
+}
+
+.disabled{
+  cursor: not-allowed;
+}
