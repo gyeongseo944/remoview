@@ -47,10 +47,15 @@ function LandingPage() {
   return (
     <div style={{ width: "100%", margin: "0" }}>
       {/* Main Image*/}
-      <MainImage image={`${IMG_URL}w1280${MainMovie.backdrop_path}`} title={MainMovie.original_title} description={MainMovie.overview} page="landing" />
+      <MainImage
+        image={`${IMG_URL}w1280${MainMovie.backdrop_path}`}
+        title={MainMovie.title ? MainMovie.title : MainMovie.original_title}
+        description={MainMovie.overview}
+        page="landing"
+      />
       <div style={{ width: "85%", margin: "1rem auto" }}>
-        <h2>Now Playing Movies</h2>
-        <hr />
+        <h2 style={{ fontFamily: "Courier New", letterSpacing: "1px", fontWeight: "bold", fontSize: "24px" }}>Now Playing Movies</h2>
+        <hr style={{ height: "2px", background: "#999999", border: "none", marginBottom: "15px" }} />
 
         {/* Movie grid cards */}
         <Row gutter={[16, 16]}>

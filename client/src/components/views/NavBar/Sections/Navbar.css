@@ -45,7 +45,7 @@
 
 .menu__container .menu_rigth {
   float: right;
-  width: 130px;
+  width: 140px;
 }
 
 .menu__mobile-button {
@@ -72,7 +72,8 @@
   padding: 14px 24px !important;
 }
 .navbarFont {
-  font-size: 18px;
+  font-size: 19px;
+  font-family: 'Courier New';
 }
 .navbarA:hover .navbarFont{
   color: #c2986e;

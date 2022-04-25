@@ -40,10 +40,15 @@ function TopRatedPage() {
   return (
     <div style={{ width: "100%", margin: "0" }}>
       {/* Main Image*/}
-      <MainImage image={`${IMG_URL}w1280${MainMovie.backdrop_path}`} title={MainMovie.original_title} description={MainMovie.overview} page="top_rated" />
+      <MainImage
+        image={`${IMG_URL}w1280${MainMovie.backdrop_path}`}
+        title={MainMovie.title ? MainMovie.title : MainMovie.original_title}
+        description={MainMovie.overview}
+        page="top_rated"
+      />
       <div style={{ width: "85%", margin: "1rem auto" }}>
-        <h2>Top Rated Movies</h2>
-        <hr />
+        <h2 style={{ fontFamily: "Courier New", letterSpacing: "1px", fontWeight: "bold", fontSize: "24px" }}>Top Rated Movies</h2>
+        <hr style={{ height: "2px", background: "#999999", border: "none", marginBottom: "15px" }} />
 
         {/* Movie grid cards */}
         <Row gutter={[16, 16]}>

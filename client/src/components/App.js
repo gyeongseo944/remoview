@@ -15,6 +15,8 @@ import Popular from "./views/MovieList/Popular";
 import NowPlaying from "./views/MovieList/NowPlaying";
 import TopRated from "./views/MovieList/TopRated";
 import Upcoming from "./views/MovieList/Upcoming";
+import LikedMovies from "./views/MovieList/LikedMovies";
+import DislikedMovies from "./views/MovieList/DislikedMovies";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route exact path="/list/nowPlaying" element={<NowPlaying />} />
         <Route exact path="/list/topRated" element={<TopRated />} />
         <Route exact path="/list/upcoming" element={<Upcoming />} />
+        <Route exact path="/list/likeMovies" element={<LikedMovies />} />
+        <Route exact path="/list/dislikeMovies" element={<DislikedMovies />} />
       </Routes>
       <Footer />
     </BrowserRouter>

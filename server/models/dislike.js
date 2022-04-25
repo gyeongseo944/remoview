@@ -16,6 +16,9 @@ const dislikeSchema = mongoose.Schema(
     moviePost: {
       type: String,
     },
+    movieImg: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

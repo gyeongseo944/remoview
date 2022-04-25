@@ -1,16 +1,21 @@
 import React from "react";
+import Moment from "moment";
 
 //es6 비구조화할당 >> 비구조화할당 미사용시 (props)를 사용하여 props.image << 이런식으로 작성
-function MainImage({ image, title, description, page }) {
+function MainImage({ image, title, description, page, date }) {
   let mainTitle = "";
   if (page === "landing" || page === "popular") {
     mainTitle = "The most popular movie in korea";
   } else if (page === "now_playing") {
     mainTitle = "Now playing movie in korea";
-  } else if (page == "top_rated") {
+  } else if (page === "top_rated") {
     mainTitle = "Top rated movie in korea";
-  } else if (page == "upcoming") {
+  } else if (page === "upcoming") {
     mainTitle = "Upcoming movie in korea";
+  } else if (page === "likeList" && date) {
+    mainTitle = "You iiked this movie at : " + Moment(date).format("MMMM Do YYYY");
+  } else if (page === "dislikeList" && date) {
+    mainTitle = "You disliked this movie at : " + Moment(date).format("MMMM Do YYYY");
   }
   return (
     <div

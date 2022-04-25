@@ -37,12 +37,12 @@ function RightMenu(props) {
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
           <a href="/login">
-            <span className="navbarFont">Sign in</span>
+            <span className="navbarFont">Log in</span>
           </a>
         </Menu.Item>
         <Menu.Item key="app">
           <a href="/register">
-            <span className="navbarFont">Sign out</span>
+            <span className="navbarFont">Sign up</span>
           </a>
         </Menu.Item>
       </Menu>

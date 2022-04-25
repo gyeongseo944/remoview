@@ -34,10 +34,21 @@ function LeftMenu(props) {
             </a>
           </Menu.Item>
         </MenuItemGroup>
-        <MenuItemGroup title="My Movies">
-          <Menu.Item>Option 3</Menu.Item>
-          <Menu.Item>Option 4</Menu.Item>
-        </MenuItemGroup>
+        {!window.localStorage.userId && <MenuItemGroup title="You can see more menus when you log in" />}
+        {window.localStorage.userId && (
+          <MenuItemGroup title="My Movies">
+            <Menu.Item>
+              <a href="/list/likeMovies">
+                <span className="navbarFont">Liked Movie List</span>
+              </a>
+            </Menu.Item>
+            <Menu.Item>
+              <a href="/list/dislikeMovies">
+                <span className="navbarFont">Disliked Movie List</span>
+              </a>
+            </Menu.Item>
+          </MenuItemGroup>
+        )}
       </SubMenu>
     </Menu>
   );

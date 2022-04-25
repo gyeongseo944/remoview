@@ -64,4 +64,17 @@ router.post("/removeDislike", (req, res) => {
   });
 });
 
+router.post("/getLikedList", (req, res) => {
+  Like.find({ userFrom: req.body.userFrom }).exec((err, doc) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).json({ success: true, list: doc });
+  });
+});
+router.post("/getDislikedList", (req, res) => {
+  Dislike.find({ userFrom: req.body.userFrom }).exec((err, doc) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).json({ success: true, list: doc });
+  });
+});
+
 module.exports = router;

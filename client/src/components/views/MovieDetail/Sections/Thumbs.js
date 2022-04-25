@@ -9,32 +9,31 @@ function Thumbs({ movieId, userFrom, movieInfo }) {
   const [Liked, setLiked] = useState(false);
   const [Disliked, setDisliked] = useState(false);
 
-  const movieTitle = movieInfo.title;
-  const moviePost = movieInfo.backdrop_path;
+  const movieTitle = movieInfo.original_title;
+  const moviePost = movieInfo.poster_path;
+  const movieImg = movieInfo.backdrop_path;
   let variables = {
     userFrom,
     movieId,
     movieTitle,
     moviePost,
+    movieImg,
   };
-
   useEffect(() => {
     Axios.post("/api/thumbs/num", variables).then((res) => {
-      console.log(res.data);
       if (res.data.success) {
         setLikeNum(res.data.likeNum);
         setDislikeNum(res.data.dislikeNum);
       } else {
-        alert("숫자에러");
+        alert("request error");
       }
     });
     Axios.post("/api/thumbs/liked", variables).then((res) => {
-      console.log(res.data);
       if (res.data.success) {
         setLiked(res.data.liked);
         setDisliked(res.data.disliked);
       } else {
-        alert("정보에러");
+        alert("request error");
       }
     });
   }, []);
@@ -100,7 +99,7 @@ function Thumbs({ movieId, userFrom, movieInfo }) {
           onClick={onClickLike}
           style={{ marginRight: "15px" }}
           disabled={Disliked ? true : false}
-          title={Disliked ? "싫어하는 리스트의 영화는 좋아하는 영화리스트에 넣을 수 없습니다" : false}
+          title={Disliked ? "싫어하는 리스트의 영화는 좋아하는 영화리스트에 넣을 수 없습니다" : ""}
         >
           <LikeOutlined /> {LikeNum}
         </button>
@@ -108,7 +107,7 @@ function Thumbs({ movieId, userFrom, movieInfo }) {
           className={"btn" + (Disliked ? " btnTrue" : " btnFalse") + (Liked ? " disabled" : "")}
           onClick={onClickDislike}
           disabled={Liked ? true : false}
-          title={Liked ? "좋아요한 영화는 싫어하는 영화리스트에 넣을 수 없습니다" : false}
+          title={Liked ? "좋아요한 영화는 싫어하는 영화리스트에 넣을 수 없습니다" : ""}
         >
           <DislikeOutlined /> {DislikeNum}
         </button>

@@ -51,7 +51,8 @@ function LoginPage(props) {
                 } else {
                   window.localStorage.removeItem("rememberMe");
                 }
-                navigate("/");
+                // navigate("/");
+                window.location.replace("/");
               } else {
                 setFormErrorMessage("Check out your Account or Password again");
               }
