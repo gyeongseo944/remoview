@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { API_URL, API_KEY, IMG_URL } from "../../Config";
 import Auth from "../../../hoc/auth";
+import Axios from "axios";
 import { useParams } from "react-router-dom";
 import MainImage from "../commons/MainImage";
 import MovieInfo from "./Sections/MovieInfo";
 import GridCards from "../commons/GridCards";
 import Thumbs from "./Sections/Thumbs";
+import Comments from "./Sections/Comments";
 import { Row } from "antd";
 
 function MovieDetail() {
   const { movieId } = useParams();
   const [Movie, setMovie] = useState([]);
   const [Casts, setCasts] = useState([]);
+  const [CommentsList, setCommentsList] = useState([]);
   const [ActorToggle, setActorToggle] = useState(false);
+  const variables = {
+    movieId: movieId,
+  };
 
   useEffect(() => {
     const endPointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}&language=ko-KR`;
@@ -27,10 +33,20 @@ function MovieDetail() {
       .then((res) => {
         setCasts(res.cast);
       });
+    Axios.post("/api/comment/getComments", variables).then((res) => {
+      if (res.data.success) {
+        setCommentsList(res.data.comments);
+      } else {
+        alert("코멘트 정보를 가져오는데에 실패했습니다.");
+      }
+    });
   }, []);
 
   const toggleActorView = () => {
     setActorToggle(!ActorToggle);
+  };
+  const refreshFnc = (newCom) => {
+    setCommentsList(CommentsList.concat(newCom));
   };
 
   return (
@@ -67,6 +83,9 @@ function MovieDetail() {
         )}
         <div style={{ textAlign: "center" }}>
           <Thumbs movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem("userId")} />
+        </div>
+        <div style={{ width: "100%" }}>
+          <Comments refreshFnc={refreshFnc} commentsList={CommentsList} movieId={movieId} />
         </div>
       </div>
     </div>
