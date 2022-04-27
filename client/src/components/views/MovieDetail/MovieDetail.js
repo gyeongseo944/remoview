@@ -14,7 +14,7 @@ function MovieDetail() {
   const { movieId } = useParams();
   const [Movie, setMovie] = useState([]);
   const [Casts, setCasts] = useState([]);
-  const [CommentsList, setCommentsList] = useState([]);
+  const [CommentLists, setCommentLists] = useState([]);
   const [ActorToggle, setActorToggle] = useState(false);
   const variables = {
     movieId: movieId,
@@ -35,7 +35,7 @@ function MovieDetail() {
       });
     Axios.post("/api/comment/getComments", variables).then((res) => {
       if (res.data.success) {
-        setCommentsList(res.data.comments);
+        setCommentLists(res.data.comments);
       } else {
         alert("코멘트 정보를 가져오는데에 실패했습니다.");
       }
@@ -46,7 +46,7 @@ function MovieDetail() {
     setActorToggle(!ActorToggle);
   };
   const refreshFnc = (newCom) => {
-    setCommentsList(CommentsList.concat(newCom));
+    setCommentLists(CommentLists.concat(newCom));
   };
 
   return (
@@ -85,7 +85,7 @@ function MovieDetail() {
           <Thumbs movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem("userId")} />
         </div>
         <div style={{ width: "100%" }}>
-          <Comments refreshFnc={refreshFnc} commentsList={CommentsList} movieId={movieId} />
+          <Comments refreshFnc={refreshFnc} commentLists={CommentLists} movieId={movieId} />
         </div>
       </div>
     </div>

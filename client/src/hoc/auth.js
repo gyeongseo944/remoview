@@ -20,6 +20,11 @@ export default function (SpecificComponent, option, adminRoute = null) {
         // 로그인 하지 않은 상태
         if (!response.payload.isAuth) {
           //isAuth (사용자) 가 false (로그인 하지 않은 상태) 일때
+          if (window.localStorage.userId) {
+            // 로그인 하지 않았는데 localStorage에 userId가 남아있는경우 >> logout을 하지 않고 state만 날라간상태
+            window.localStorage.removeItem("userId");
+            window.location.replace("/");
+          }
           if (option) {
             // option 이 true(로그인한 유저만 들어갈 수 있는 페이지) 라면
             navigate("/login"); // 로그인페이지로 이동

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Comment, Avatar, Button, Input } from "antd";
 import { useSelector } from "react-redux";
 import Axios from "axios";
+const { TextArea } = Input;
 
 function SingleComment({ movieId, commentValue, refreshFnc }) {
   const user = useSelector((state) => state.user);
@@ -11,7 +12,11 @@ function SingleComment({ movieId, commentValue, refreshFnc }) {
     setCommentValue(e.currentTarget.value);
   };
   const onClickReplyOpen = () => {
-    setOpenReply(!OpenReply);
+    if (!user.userData._id) {
+      alert("로그인 후 이용 가능합니다.");
+    } else {
+      setOpenReply(!OpenReply);
+    }
   };
   const actions = [
     <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
@@ -44,15 +49,17 @@ function SingleComment({ movieId, commentValue, refreshFnc }) {
         content={<p>{commentValue.content}</p>}
       />
       {OpenReply && (
-        <form style={{ display: "flex", marginLeft: "45px" }} onSubmit={onSubmit}>
-          <textarea style={{ width: "100%", borderRadius: "5px" }} onChange={onHandleChange} value={CommentValue} placeholder="코멘트를 작성해주세요" />
+        <div>
+          <form style={{ display: "flex", marginLeft: "45px" }} onSubmit={onSubmit}>
+            <TextArea style={{ width: "100%", borderRadius: "5px" }} onChange={onHandleChange} value={CommentValue} placeholder="코멘트를 작성해주세요" />
+            <br />
+            <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+              Submit
+            </Button>
+          </form>
           <br />
-          <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
-            Submit
-          </button>
-        </form>
+        </div>
       )}
-      <br />
     </div>
   );
 }
