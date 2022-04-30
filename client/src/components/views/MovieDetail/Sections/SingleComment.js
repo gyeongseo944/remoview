@@ -45,7 +45,7 @@ function SingleComment({ movieId, commentValue, refreshFnc }) {
       <Comment
         actions={actions}
         author={commentValue.writer.name}
-        avatar={<Avatar src="/img/profile.png" alt={commentValue.writer.name} />}
+        avatar={<Avatar src="/img/user.png" alt={commentValue.writer.name} />}
         content={<p>{commentValue.content}</p>}
       />
       {OpenReply && (

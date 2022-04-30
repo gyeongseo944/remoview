@@ -47,6 +47,11 @@ function LeftMenu(props) {
                 <span className="navbarFont">Disliked Movie List</span>
               </a>
             </Menu.Item>
+            <Menu.Item>
+              <a href="/list/commentsList">
+                <span className="navbarFont">Your Comments List</span>
+              </a>
+            </Menu.Item>
           </MenuItemGroup>
         )}
       </SubMenu>

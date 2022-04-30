@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 // import axios from "axios";
 import { loginUser } from "../../../_actions/user_action";
-import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
@@ -13,7 +12,6 @@ const { Title } = Typography;
 
 function LoginPage(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
@@ -111,9 +109,6 @@ function LoginPage(props) {
                 <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe}>
                   Remember me
                 </Checkbox>
-                <a className="login-form-forgot" href="/reset_user" style={{ float: "right" }}>
-                  forgot password
-                </a>
                 <div>
                   <Button
                     type="primary"

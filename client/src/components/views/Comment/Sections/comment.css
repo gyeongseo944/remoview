@@ -1,0 +1,17 @@
+.deleteBtn{
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: white;
+  border-color: gray;
+  border: solid gray 1px;
+}
+
+.deleteBtn:hover{
+  background-color: #ededed;
+}
+
+.ant-comment-inner {
+  padding: 12px 0;
+}
