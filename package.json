@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "web site for every movie lover",
   "main": "index.js",
+  "engine":{
+    "node":"16.13.2",
+    "npm":"8.5.0"
+  },
   "scripts": {
     "start": "node index.js",
     "backend": "nodemon server/index.js",
