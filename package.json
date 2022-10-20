@@ -10,8 +10,6 @@
   "scripts": {
     "start": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "backend": "nodemon server/index.js",
-    "heroku-prebuild": "npm install --dev",
-    "heroku-postbuild": "cd client && npm install && npm install webpack-cli --dev && npm run build",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "Gyeongseo",
